@@ -1,0 +1,23 @@
+.Weather {
+  border: 7px solid #6c819b;
+  margin: auto;
+  border-radius: 15px;
+  width: fit-content;
+  padding: 10px 20px 30px 20px;
+  opacity: 80%;
+  color: white;
+  background-color: #1d314a;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.Weather form {
+  text-align: center;
+}
+
+.Weather .temperature {
+  text-align: center;
+  font-size: 100px;
+}
+.Weather .weatherIndex {
+  font-size: 20px;
+}
