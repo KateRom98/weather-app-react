@@ -6,15 +6,27 @@ export default function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1 className="text-center m-5">Weather</h1>
+        <h1 className="m-5">Weather</h1>
         <Weather />
         <footer>
           This website was built by{" "}
-          <a href="https://magenta-pika-c7a68c.netlify.app/">
+          <a
+            href="https://magenta-pika-c7a68c.netlify.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
             {" "}
             Kateryna Dibtsova
           </a>{" "}
-          and is open-sourced on GitHub
+          and
+          <a
+            href="https://github.com/KateRom98/weather-app-react"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {" "}
+            is open-sourced on GitHub
+          </a>
         </footer>
       </div>
     </div>
