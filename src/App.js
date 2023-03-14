@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1 className="m-5">Weather</h1>
+        <h1 className="text-center m-5">Weather</h1>
         <Weather />
         <footer>
           This website was built by{" "}

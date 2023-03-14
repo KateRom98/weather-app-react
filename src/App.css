@@ -4,5 +4,8 @@
 
 .App h1 {
   font-size: 50px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.App footer {
+  font-weight: 500;
+  color: black;
 }
