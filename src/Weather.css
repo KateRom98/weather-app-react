@@ -39,3 +39,6 @@
 .Weather .weatherIndex {
   font-size: 20px;
 }
+.Weather .celsius {
+  font-size: 50px;
+}

@@ -1,38 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./Weather.css";
 
-export default function Weather() {
-  return (
-    <div className="Weather">
-      <form>
-        <input
-          type="search"
-          placeholder="Enter a city..."
-          autoFocus="on"
-          className="search"
-        />
-        <input type="submit" value="Search" className="button" />
-      </form>
-      <h3 className="text-center m-4 fs-1">Berlin, Germany</h3>
-      <h4>Wednesday, 14:00 </h4>
-      <div className="row weatherIndex">
-        <div className="col">
-          <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAg5JREFUeNrt2tGRgyAQBmBLoARLSAmUkBIsISVYgiVYgiVQgq//myXQAfdwS4bJqRFuCWjWmZ3JaGYin8AumMY513xzNAIgAAIgAAIgAAIgAAIgAALwe4LhANACGADMANxLzHStbQoc2QGoce5g9JcBAKA2nvi7mAGoUwP8o/FPhOoBAGgAIwBD0ftxHNntiw6HJICdBiqa8BxD2E9MjNEAAO4bNzwxPn0fA/WsbNkjBWDZuNkHXZ8ZAQ5DfQQAwG3nJjR9xxWKpOwRC6D3AGgOcGdCYAMI0p8rHEMWAGq82Zit++B7roJoWQEAdBs/NPouR/PDUAnAwAaw0+27YKEzVdLw6EryCIDZabymIeBqC06AP93+QEa4LMASlLv2GwF81zc1N54bwJe29kA1WHMY/wBjAe4vY388KUBYLbY5FkNniudSOwXAXSTmlLWAKtRl/a4T91K7qxlgXKvpKQVzzUOmxiFgg70FBeBBu0I9fVacVWiNk6AOFmB2A6gLUrIO9wAoa5mcADnT4Phm9blWlClC0B6Pzve5AHIWQm1EmW1pSNiVcv129GGlboubXGmJGsWS56l37GFOqQA5FkMmputGDKeRLQ1+4mAEWKp4OxzR6KXEirA4QOZ9RPPuHWNRAMb3iMmbpKUBdOkNktIAt+oB5F9iAiAAAiAAAiAAAiAAAiAAAiAAAiAAl48fFVnRpiVnD+AAAAAASUVORK5CYII="
-            alt="Clouds"
-            width="150px"
+export default function Weather(props) {
+  const [loaded, setLoaded] = useState(false);
+  const [weather, setWeather] = useState({});
+
+  function getResponse(response) {
+    console.log(response);
+    setLoaded(true);
+    setWeather({
+      cityName: response.data.city,
+      country: response.data.country,
+      time: response.data.time,
+      image: response.data.condition.icon_url,
+      imageDescription: response.data.condition.description,
+      imageName: response.data.condition.icon,
+      temperature: response.data.temperature.current,
+      wind: response.data.wind.speed,
+      humidity: response.data.temperature.humidity,
+      pressure: response.data.temperature.pressure,
+    });
+  }
+
+  if (loaded) {
+    return (
+      <div className="Weather">
+        <form>
+          <input
+            type="search"
+            placeholder="Enter a city..."
+            autoFocus="on"
+            className="search"
           />
-          <div>Cloudy</div>
+          <input type="submit" value="Search" className="button" />
+        </form>
+        <div className="m-4 fs-1">
+          {weather.cityName}
+          <br />
+          🗺 {weather.country}
         </div>
-        <div className="col temperature">14°C</div>
-        <div className="col">
-          <ul>
-            <li>Wind: 21 km/h</li>
-            <li>Humidity: 74%</li>
-            <li>Pressure: 1025mb</li>
-          </ul>
+        <h4>{weather.time} </h4>
+        <div className="row weatherIndex">
+          <div className="col">
+            <img src={weather.image} alt={weather.imageName} width="150px" />
+            <div className="text-capitalize">{weather.imageDescription}</div>
+          </div>
+          <div className="col temperature">
+            {Math.round(weather.temperature)}
+            <span className="celsius">°C</span>
+          </div>
+          <div className="col">
+            <ul>
+              <li>Wind: {weather.wind} km/h</li>
+              <li>Humidity: {weather.humidity}%</li>
+              <li>Pressure: {weather.pressure}mb</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    const apiKey = `90a3822d88740dfa4e667ccot8cebf7b`;
+    const city = props.city;
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(getResponse);
+
+    return "Loading...";
+  }
 }
