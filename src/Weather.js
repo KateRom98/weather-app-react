@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -12,7 +13,7 @@ export default function Weather(props) {
     setWeather({
       cityName: response.data.city,
       country: response.data.country,
-      time: response.data.time,
+      time: new Date(response.data.time * 1000),
       image: response.data.condition.icon_url,
       imageDescription: response.data.condition.description,
       imageName: response.data.condition.icon,
@@ -40,7 +41,9 @@ export default function Weather(props) {
           <br />
           🗺 {weather.country}
         </div>
-        <h4>{weather.time} </h4>
+        <h4>
+          <FormattedDate date={weather.time} />
+        </h4>
         <div className="row weatherIndex">
           <div className="col">
             <img src={weather.image} alt={weather.imageName} width="150px" />
