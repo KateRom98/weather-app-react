@@ -64,7 +64,7 @@ export default function Weather(props) {
           <FormattedDate date={weather.time} />
         </h4>
         <WeatherInfo data={weather} />
-        <WeatherForecast query={city} />
+        <WeatherForecast query={weather.cityName} />
       </div>
     );
   } else {
