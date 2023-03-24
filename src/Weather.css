@@ -18,6 +18,7 @@
 
 .Weather .search {
   border: 1px solid black;
+  max-width: 200px;
 }
 
 .Weather .button {
@@ -41,4 +42,13 @@
 }
 .Weather .celsius {
   font-size: 50px;
+}
+
+@media (max-width: 900px) {
+  .Weather .search {
+    max-width: 150px;
+  }
+  .Weather .button {
+    font-size: 17px;
+  }
 }

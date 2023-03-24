@@ -45,7 +45,7 @@ export default function Weather(props) {
   if (loaded) {
     return (
       <div className="Weather">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="d-flex justify-content-center">
           <input
             type="search"
             placeholder="Enter a city..."
